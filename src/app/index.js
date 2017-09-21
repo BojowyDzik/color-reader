@@ -1,39 +1,31 @@
 import React from "react";
 import { render } from "react-dom";
+import { Input } from "./component/Input";
+import { Result } from "./component/Result";
 
 class App extends React.Component {
+    constructor(){
+        super();
+        this.state = {
+            inputLabel: "ENTER A COLOR",
+            resultLabel: "SELECTED COLOR"
+        }
+    }
     render(){
         return(
             <div className="container">
                 <div className="row">
                     <div className="col-md-1"></div>
                     <div className="col-md-4">
-                        <div className="row">
-                            <div className="col-md-12">
-                                ENTER A COLOR
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-md-12">
-                                <div className="form-inline">
-                                    <input className="form-control mr-sm-2" type="text"/>
-                                    <button className="btn btn-primary mr-sm-2">OK</button>
-                                </div>
-                            </div>
-                        </div>
+                        <Input
+                            inputLabel={this.state.inputLabel}
+                        />
                     </div>
                     <div className="col-md-1"></div>
                     <div className="col-md-4">
-                        <div className="row">
-                            <div className="col-md-12">
-                                ENTER A COLOR
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-md-12">
-                                <div style={{backgroundColor: "blue", color: "blue"}}>ss</div>
-                            </div>
-                        </div>
+                        <Result
+                            resultLabel={this.state.resultLabel}
+                        />
                     </div>
                 </div>
             </div>
