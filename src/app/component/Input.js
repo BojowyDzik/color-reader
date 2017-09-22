@@ -10,10 +10,10 @@ export class Input extends React.Component {
             inputValue: '',
             invalidColorMessage: false,
             REGEX: {
-                HEX: /^\#([a-fA-F0-9]{2})([a-fA-F0-9]{2})([a-fA-F0-9]{2})$/,
-                SHORT_HEX: /^\#([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])$/,
-                RGB: /^rgb\((\d{1,3})\,(\d{1,3})\,(\d{1,3})\)$/,
-                HSL: /^hsl\((\d{1,3})\,(\d{1,3})\%\,(\d{1,3})\%\)$/
+                HEX: /^\#([a-fA-F0-9]{2})([a-fA-F0-9]{2})([a-fA-F0-9]{2}) *$/,
+                SHORT_HEX: /^\#([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9]) *$/,
+                RGB: /^rgb\((\d{1,3})\, {0,1}(\d{1,3})\, {0,1}(\d{1,3})\) *$/,
+                HSL: /^hsl\((\d{1,3})\, {0,1}(\d{1,3})\%\, {0,1}(\d{1,3})\%\) *$/
             }
         }
     }
@@ -23,27 +23,59 @@ export class Input extends React.Component {
             this.setState({
                 invalidColorMessage: false
             });
+            this.onHexColor(this.state.inputValue);
             console.log(true);
         }else if(this.state.inputValue.match(this.state.REGEX.SHORT_HEX)){
             this.setState({
                 invalidColorMessage: false
             });
+            this.onShortHexColor(this.state.inputValue);
             console.log(true);
         }else if(this.state.inputValue.match(this.state.REGEX.RGB)){
             this.setState({
                 invalidColorMessage: false
             });
+            this.onRgbColor(this.state.inputValue);
             console.log(true);
         }else if(this.state.inputValue.match(this.state.REGEX.HSL)){
             this.setState({
                 invalidColorMessage: false
             });
+            this.onHslColor(this.state.inputValue);
             console.log(true);
         }else {
             this.setState({
                 invalidColorMessage: true
             });
         }
+    }
+
+    onHexColor(color) {
+        this.props.newColor(color);
+        this.props.hexToRbg(color);
+        this.props.hexToShortHex(color);
+        this.props.hexToHsl(color);
+    }
+
+    onShortHexColor(color){
+        this.props.newColor(color);
+        this.props.shortHexToRgb(color);
+        this.props.shortHexToHex(color);
+        this.props.shortHexToHsl(color);
+    }
+
+    onRgbColor(color){
+        this.props.newColor(color);
+        this.props.rgbToHex(color);
+        this.props.rgbToShortHex(color);
+        this.props.rgbToHsl(color);
+    }
+
+    onHslColor(color){
+        this.props.newColor(color);
+        this.props.hslToRgb(color);
+        this.props.hslToHex(color);
+        this.props.hslToShortHex(color);
     }
 
     onHandleChange(event){
@@ -87,5 +119,17 @@ export class Input extends React.Component {
 }
 
 Input.PropTypes = {
-    inputLabel: PropTypes.string
+    newColor: PropTypes.func,
+    hexToRbg: PropTypes.func,
+    hexToShortHex: PropTypes.func,
+    hexToHsl: PropTypes.func,
+    rgbToHex: PropTypes.func,
+    rgbToShortHex: PropTypes.func,
+    rgbToHsl: PropTypes.func,
+    shortHexToRgb: PropTypes.func,
+    shortHexToHex: PropTypes.func,
+    shortHexToHsl: PropTypes.func,
+    hslToRgb: PropTypes.func,
+    hslToHex: PropTypes.func,
+    hslToShortHex: PropTypes.func
 };

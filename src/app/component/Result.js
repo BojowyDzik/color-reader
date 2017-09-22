@@ -10,15 +10,26 @@ export class Result extends React.Component {
     }
     render() {
         return(
-            <div>
+            <div className="form-group">
                 <div className="row">
-                    <div className="col-md-12">
+                    <div className="col-md-6" style={{textAlign: "center"}}>
                         {this.state.ResLabel}
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-md-6">
-                        <div style={{backgroundColor: "blue", color: "blue"}}>ss</div>
+                        <textarea className="form-control" rows="5" style={{backgroundColor: this.props.initialColor}} disabled></textarea>
+                        {/*<div style={{backgroundColor: this.props.initialColor, color: this.props.initialColor}}>ss</div>*/}
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-md-6" style={{textAlign: "center"}}>
+                        {this.props.initialFormat1}
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-md-6" style={{textAlign: "center"}}>
+                        {this.props.initialFormat2}
                     </div>
                 </div>
             </div>
@@ -27,5 +38,8 @@ export class Result extends React.Component {
 }
 
 Result.PropTypes = {
-    resultLabel: PropTypes.string
+    resultLabel: PropTypes.string,
+    initialColor: PropTypes.string,
+    initialFormat1: PropTypes.string,
+    initialFormat2: PropTypes.string
 }
