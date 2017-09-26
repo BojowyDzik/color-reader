@@ -24,25 +24,23 @@ export class Input extends React.Component {
                 invalidColorMessage: false
             });
             this.onHexColor(this.state.inputValue);
-            console.log(true);
         }else if(this.state.inputValue.match(this.state.REGEX.SHORT_HEX)){
             this.setState({
                 invalidColorMessage: false
             });
-            this.onShortHexColor(this.state.inputValue);
-            console.log(true);
+            let shortToHex = this.state.inputValue.substring(1);
+            let shortToHexColor = "#" + shortToHex[0] + shortToHex[0] + shortToHex[1] +shortToHex[1] + shortToHex[2] + shortToHex[2];
+            this.onHexColor(shortToHexColor);
         }else if(this.state.inputValue.match(this.state.REGEX.RGB)){
             this.setState({
                 invalidColorMessage: false
             });
             this.onRgbColor(this.state.inputValue);
-            console.log(true);
         }else if(this.state.inputValue.match(this.state.REGEX.HSL)){
             this.setState({
                 invalidColorMessage: false
             });
             this.onHslColor(this.state.inputValue);
-            console.log(true);
         }else {
             this.setState({
                 invalidColorMessage: true
@@ -52,22 +50,13 @@ export class Input extends React.Component {
 
     onHexColor(color) {
         this.props.newColor(color);
-        this.props.hexToRbg(color);
-        this.props.hexToShortHex(color);
+        this.props.hexToRgb(color);
         this.props.hexToHsl(color);
-    }
-
-    onShortHexColor(color){
-        this.props.newColor(color);
-        this.props.shortHexToRgb(color);
-        this.props.shortHexToHex(color);
-        this.props.shortHexToHsl(color);
     }
 
     onRgbColor(color){
         this.props.newColor(color);
         this.props.rgbToHex(color);
-        this.props.rgbToShortHex(color);
         this.props.rgbToHsl(color);
     }
 
@@ -75,7 +64,6 @@ export class Input extends React.Component {
         this.props.newColor(color);
         this.props.hslToRgb(color);
         this.props.hslToHex(color);
-        this.props.hslToShortHex(color);
     }
 
     onHandleChange(event){
@@ -91,7 +79,7 @@ export class Input extends React.Component {
             errorCmp = (
                 <div className="row">
                     <div className="col-md-12">
-                        <h3 style={{color: "red"}}>Invalid color format!</h3>
+                        <h4 style={{color: "red"}}>Invalid color format!</h4>
                     </div>
                 </div>
             )
@@ -120,16 +108,10 @@ export class Input extends React.Component {
 
 Input.PropTypes = {
     newColor: PropTypes.func,
-    hexToRbg: PropTypes.func,
-    hexToShortHex: PropTypes.func,
+    hexToRgb: PropTypes.func,
     hexToHsl: PropTypes.func,
     rgbToHex: PropTypes.func,
-    rgbToShortHex: PropTypes.func,
     rgbToHsl: PropTypes.func,
-    shortHexToRgb: PropTypes.func,
-    shortHexToHex: PropTypes.func,
-    shortHexToHsl: PropTypes.func,
     hslToRgb: PropTypes.func,
-    hslToHex: PropTypes.func,
-    hslToShortHex: PropTypes.func
+    hslToHex: PropTypes.func
 };

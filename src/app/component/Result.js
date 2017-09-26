@@ -18,7 +18,7 @@ export class Result extends React.Component {
                 </div>
                 <div className="row">
                     <div className="col-md-6">
-                        <textarea className="form-control" rows="5" style={{backgroundColor: this.props.initialColor}} disabled></textarea>
+                        <textarea className="form-control" rows="6" style={{backgroundColor: this.props.initialColor}} disabled></textarea>
                         {/*<div style={{backgroundColor: this.props.initialColor, color: this.props.initialColor}}>ss</div>*/}
                     </div>
                 </div>
@@ -42,4 +42,4 @@ Result.PropTypes = {
     initialColor: PropTypes.string,
     initialFormat1: PropTypes.string,
     initialFormat2: PropTypes.string
-}
+};
