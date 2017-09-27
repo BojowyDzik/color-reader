@@ -87,9 +87,9 @@ export class Input extends React.Component {
 
         return (
             <div>
-                <div className="row">
+                <div className="row pt-5">
                     <div className="col-md-12">
-                        {this.state.InpLabel}
+                        <h6>{this.state.InpLabel}</h6>
                     </div>
                 </div>
                 <div className="row">

@@ -10,25 +10,32 @@ export class Result extends React.Component {
     }
     render() {
         return(
-            <div className="form-group">
+            <div className="form-group" style={{textAlign: "center"}}>
                 <div className="row">
-                    <div className="col-md-6" style={{textAlign: "center"}}>
-                        {this.state.ResLabel}
+                    <div className="col-md-12">
+                        <h6>{this.state.ResLabel}</h6>
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-md-6">
-                        <textarea className="form-control" rows="6" style={{backgroundColor: this.props.initialColor}} disabled></textarea>
-                        {/*<div style={{backgroundColor: this.props.initialColor, color: this.props.initialColor}}>ss</div>*/}
+                    <div className="col-md-2">
+                    </div>
+                    <div className="col-md-8" style={{
+                        backgroundColor: this.props.initialColor,
+                        border: "1px solid lightgrey",
+                        height: "150px",
+                        borderRadius: "5px"
+                    }}>
+                    </div>
+                    <div className="col-md-2">
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-md-6" style={{textAlign: "center"}}>
+                    <div className="col-md-12">
                         {this.props.initialFormat1}
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-md-6" style={{textAlign: "center"}}>
+                    <div className="col-md-12">
                         {this.props.initialFormat2}
                     </div>
                 </div>

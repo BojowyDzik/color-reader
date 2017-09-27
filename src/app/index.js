@@ -190,7 +190,7 @@ class App extends React.Component {
     render(){
         return(
             <div className="container">
-                <div className="row">
+                <div className="row mt-3">
                     <div className="col-md-3"></div>
                     <div className="col-md-3">
                         <Input
@@ -205,7 +205,7 @@ class App extends React.Component {
                             hslToHex={this.hslToHex.bind(this)}
                         />
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-3">
                         <Result
                             resultLabel={this.state.resultLabel}
                             initialColor={this.state.initialColor}
@@ -213,6 +213,7 @@ class App extends React.Component {
                             initialFormat2={this.state.initialFormat2}
                         />
                     </div>
+                    <div className="col-md-3"></div>
                 </div>
             </div>
         );
