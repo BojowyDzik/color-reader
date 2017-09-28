@@ -1,14 +1,16 @@
 import React from "react";
-
 import PropTypes from "prop-types";
 
 export class Input extends React.Component {
     constructor(props) {
         super();
-        this.state ={
+        this.state = {
             InpLabel: props.inputLabel,
             inputValue: '',
             invalidColorMessage: false,
+        };
+
+        this.config = {
             REGEX: {
                 HEX: /^\#([a-fA-F0-9]{2})([a-fA-F0-9]{2})([a-fA-F0-9]{2}) *$/,
                 SHORT_HEX: /^\#([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9]) *$/,
@@ -19,29 +21,21 @@ export class Input extends React.Component {
     }
 
     colorCheck() {
-        if(this.state.inputValue.match(this.state.REGEX.HEX)) {
-            this.setState({
-                invalidColorMessage: false
-            });
+        this.setState({
+            invalidColorMessage: false
+        });
+
+        if (this.state.inputValue.match(this.config.REGEX.HEX)) {
             this.onHexColor(this.state.inputValue);
-        }else if(this.state.inputValue.match(this.state.REGEX.SHORT_HEX)){
-            this.setState({
-                invalidColorMessage: false
-            });
-            let shortToHex = this.state.inputValue.substring(1);
-            let shortToHexColor = "#" + shortToHex[0] + shortToHex[0] + shortToHex[1] +shortToHex[1] + shortToHex[2] + shortToHex[2];
+        } else if (this.state.inputValue.match(this.config.REGEX.SHORT_HEX)) {
+            const shortToHex = this.state.inputValue.substring(1);
+            const shortToHexColor = "#" + shortToHex[0] + shortToHex[0] + shortToHex[1] + shortToHex[1] + shortToHex[2] + shortToHex[2];
             this.onHexColor(shortToHexColor);
-        }else if(this.state.inputValue.match(this.state.REGEX.RGB)){
-            this.setState({
-                invalidColorMessage: false
-            });
+        } else if (this.state.inputValue.match(this.config.REGEX.RGB)) {
             this.onRgbColor(this.state.inputValue);
-        }else if(this.state.inputValue.match(this.state.REGEX.HSL)){
-            this.setState({
-                invalidColorMessage: false
-            });
+        } else if (this.state.inputValue.match(this.config.REGEX.HSL)) {
             this.onHslColor(this.state.inputValue);
-        }else {
+        } else {
             this.setState({
                 invalidColorMessage: true
             });

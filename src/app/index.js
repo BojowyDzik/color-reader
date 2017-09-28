@@ -22,27 +22,27 @@ class App extends React.Component {
     }
 
     hexToRgb(color){
-        let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(color);
-        let r = parseInt(result[1], 16).toString();
-        let g = parseInt(result[2], 16).toString();
-        let b = parseInt(result[3], 16).toString();
+        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(color);
+        const r = parseInt(result[1], 16).toString();
+        const g = parseInt(result[2], 16).toString();
+        const b = parseInt(result[3], 16).toString();
         this.setState({
             initialFormat1: "rgb(" + r + ", " + g + ", " + b + ")"
         });
     }
 
     hexToHsl(color){
-        let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(color);
+        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(color);
         let r = parseInt(result[1], 16).toString();
         let g = parseInt(result[2], 16).toString();
         let b = parseInt(result[3], 16).toString();
 
         r /= 255, g /= 255, b /= 255;
-        let max = Math.max(r, g, b), min = Math.min(r, g, b);
+        const max = Math.max(r, g, b), min = Math.min(r, g, b);
         let h, s, l = (max + min) / 2;
 
         if(max == min){
-            h = s = 0; // achromatic
+            h = s = 0;
         }else{
             let d = max - min;
             s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
@@ -54,8 +54,7 @@ class App extends React.Component {
             h /= 6;
         }
 
-        let hexColor = "hsl(" + Math.round(h*360) + "," + Math.round(s*100) + "%," + Math.round(l*100) + "%)";
-
+        const hexColor = "hsl(" + Math.round(h*360) + "," + Math.round(s*100) + "%," + Math.round(l*100) + "%)";
         this.setState({
             initialFormat2: hexColor
         })
@@ -63,8 +62,8 @@ class App extends React.Component {
     }
 
     rgbToHex(color){
-        let s = color.replace(/[^,\d]/g, "");
-        let myString = s.split(",");
+        const s = color.replace(/[^,\d]/g, "");
+        const myString = s.split(",");
         let hex1 = parseInt(myString[0]).toString(16);
         let hex2 = parseInt(myString[1]).toString(16);
         let hex3 = parseInt(myString[2]).toString(16);
@@ -85,19 +84,19 @@ class App extends React.Component {
     }
 
     rgbToHsl(color){
-        let string = color.replace(/[^,\d]/g, "");
-        let myString = string.split(",");
+        const string = color.replace(/[^,\d]/g, "");
+        const myString = string.split(",");
 
         let r = parseInt(myString[0]);
         let g = parseInt(myString[1]);
         let b = parseInt(myString[2]);
 
         r /= 255, g /= 255, b /= 255;
-        let max = Math.max(r, g, b), min = Math.min(r, g, b);
+        const max = Math.max(r, g, b), min = Math.min(r, g, b);
         let h, s, l = (max + min) / 2;
 
         if(max == min){
-            h = s = 0; // achromatic
+            h = s = 0;
         }else{
             let d = max - min;
             s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
@@ -109,15 +108,15 @@ class App extends React.Component {
             h /= 6;
         }
 
-        let hslColor = "hsl(" + Math.round(h*360) + "," + Math.round(s*100) + "%," + Math.round(l*100) + "%)";
+        const hslColor = "hsl(" + Math.round(h*360) + "," + Math.round(s*100) + "%," + Math.round(l*100) + "%)";
         this.setState({
             initialFormat2: hslColor
         });
     }
 
     hslToRgb(color){
-        let string = color.replace(/[^,\d]/g, "");
-        let myString = string.split(",");
+        const string = color.replace(/[^,\d]/g, "");
+        const myString = string.split(",");
 
         let h = parseInt(myString[0]) / 360;
         let s = parseInt(myString[1]) / 100;
@@ -126,9 +125,9 @@ class App extends React.Component {
         let r, g, b;
 
         if(s == 0){
-            r = g = b = l; // achromatic
+            r = g = b = l;
         }else{
-            let hue2rgb = function hue2rgb(p, q, t){
+            const hue2rgb = function hue2rgb(p, q, t){
                 if(t < 0) t += 1;
                 if(t > 1) t -= 1;
                 if(t < 1/6) return p + (q - p) * 6 * t;
@@ -137,22 +136,22 @@ class App extends React.Component {
                 return p;
             };
 
-            let q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-            let p = 2 * l - q;
+            const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+            const p = 2 * l - q;
             r = hue2rgb(p, q, h + 1/3);
             g = hue2rgb(p, q, h);
             b = hue2rgb(p, q, h - 1/3);
         }
 
-        let rgbColor = "rgb(" + Math.round(r * 255) + "," + Math.round(g * 255) + "," +  Math.round(b * 255) + ")";
+        const rgbColor = "rgb(" + Math.round(r * 255) + "," + Math.round(g * 255) + "," +  Math.round(b * 255) + ")";
         this.setState({
            initialFormat1: rgbColor
         });
     }
 
     hslToHex(color){
-        let string = color.replace(/[^,\d]/g, "");
-        let myString = string.split(",");
+        const string = color.replace(/[^,\d]/g, "");
+        const myString = string.split(",");
 
         let h = parseInt(myString[0]) / 360;
         let s = parseInt(myString[1]) / 100;
@@ -160,7 +159,7 @@ class App extends React.Component {
 
         let r, g, b;
         if (s === 0) {
-            r = g = b = l; // achromatic
+            r = g = b = l;
         } else {
             const hue2rgb = (p, q, t) => {
                 if (t < 0) t += 1;
@@ -180,8 +179,8 @@ class App extends React.Component {
             const hex = Math.round(x * 255).toString(16);
             return hex.length === 1 ? '0' + hex : hex;
         };
-        let hexColor = "#" + toHex(r) + toHex(g) + toHex(b);
 
+        const hexColor = "#" + toHex(r) + toHex(g) + toHex(b);
         this.setState({
            initialFormat2: hexColor
         });
